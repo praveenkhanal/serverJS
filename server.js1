@@ -1,0 +1,50 @@
+// Global variables
+console.log('hello from node.js');
+
+var express = require('express');
+var bodyParser = require('body-parser');
+
+var app = express();
+var port = process.env.PORT || 3000;
+
+var burgers = [
+'Hamburger',
+'Cheese Burger',
+'Veggie Bureger',
+];
+
+var tacos = [
+'chicken Tacos',
+'pork Tacos',
+'ham Tacos'];
+
+//ALL TAcos api
+app.get('/api/tacos', function(req, res){
+	res.json(tacos);
+});
+
+
+
+
+// ROUTES
+app.get('/', function(req, res){
+	// res.send('<html><head><title><Express Example</title></head></html>');
+// res.send('Hello World!');
+res.sendFile('views/index.html', { root: __dirname })
+
+//one taco by ID Api route
+app.get('/api/tacos/:id', function(req, res){
+	var index = req.params.id;
+	var choice = tacos[index] ||'sorry, that option does not exist.'; 
+	resp.json(choice)
+})
+
+// All burgers api
+app.get('/api/burgers', function(req, res){
+	res.json(burgers);
+})
+
+});
+//  start server
+app.listen(port, function(){console.log(`server running on port ${port}`)
+});
